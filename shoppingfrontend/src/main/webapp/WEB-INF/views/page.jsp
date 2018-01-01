@@ -30,7 +30,7 @@
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
 
 <!-- Bootstrap flatly theme-->
-<link href="${css}/bootstrap-flatly-theme.css" rel="stylesheet">
+<link href="${css}/bootstrap-solar-theme.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="${css}/myapp.css" rel="stylesheet">
@@ -44,17 +44,26 @@
 
 		<!-- Page Content -->
 		<div class="content">
-			<!--  loading the Home page -->
+
+			<!--  loading only when user click the Home page -->
 			<c:if test="${userClickHome == true }">
 				<%@include file="home.jsp"%>
 			</c:if>
-			<!-- loading About Us page -->
+
+			<!-- loading only when user click About Us page -->
 			<c:if test="${userClickAbout == true }">
 				<%@include file="about.jsp"%>
 			</c:if>
-			<!-- loading the contact page -->
+
+			<!-- loading only when user click the contact page -->
 			<c:if test="${userClickContact == true }">
 				<%@include file="contact.jsp"%>
+			</c:if>
+
+			<!-- loading only if user click All Products or user click Category Products -->
+			<c:if
+				test="${userClickAllProducts == true or userClickCategoryProducts}">
+				<%@include file="listProducts.jsp"%>
 			</c:if>
 		</div>
 		<!-- Footer -->
