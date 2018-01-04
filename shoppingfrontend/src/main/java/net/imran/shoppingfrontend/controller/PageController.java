@@ -65,7 +65,7 @@ public class PageController {
 		mv.addObject("categories", categoryDAO.list());
 
 		// passing the list of categories
-		mv.addObject("categories", category);
+		mv.addObject("category", category);
 		mv.addObject("userClickategoryProducts", true);
 		return mv;
 	}

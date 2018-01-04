@@ -3,19 +3,23 @@ package net.imran.shoppingbackend.daoimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import net.imran.shoppingbackend.dao.CategoryDAO;
 import net.imran.shoppingbackend.dto.Category;
 
 @Repository("categoryDAO")
+
 public class CategoryDAOImpl implements CategoryDAO {
 
+	@Autowired
+	private SessionFactory sessionFactory;
 	private static List<Category> categories = new ArrayList<>();
 
 	static {
-
-		
 
 		// Adding first category
 		Category category = new Category();
@@ -54,16 +58,31 @@ public class CategoryDAOImpl implements CategoryDAO {
 	}
 
 	@Override
-	public Category get(int id){
-		
-		//enchance for loop
-		
-		for(Category category : categories) {
-			if (category.getId() == id)  return category;
-			
+	public Category get(int id) {
+
+		// enchance for loop
+
+		for (Category category : categories) {
+			if (category.getId() == id)
+				return category;
+
 		}
-		return null;	
-}
-	
+		return null;
+	}
+
+	@Override
+	@Transactional
+	public boolean add(Category category) {
+		try {
+			// add the category to the database
+			sessionFactory.getCurrentSession().persist(category);
+			return true;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+		
+	}
 
 }
